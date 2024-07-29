@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { createElement, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import transformer, { bindActions } from '@sweetalert/transformer'
 
@@ -18,14 +18,7 @@ const getDOMNodeFromJSX = (Element) => {
 
   return new Promise((resolve) => {
     const callback = () => resolve(wrapper.firstChild)
-
-    const WrappedElement = () => (
-      <CallbackWrapper callback={callback}>
-        <Element />
-      </CallbackWrapper>
-    )
-
-    root.render(WrappedElement)
+    root.render(createElement(CallbackWrapper, { callback }, Element))
   })
 }
 
